@@ -82,7 +82,7 @@ Currently keeping the following backends active:
 ![SkinCareApp](https://img.shields.io/badge/SkinCare_App-b8e8d4?style=flat-square&logoColor=2d1b6e)
 ![BBT API](https://img.shields.io/badge/BBT_API-f0e4a0?style=flat-square&logoColor=2d1b6e)
 
-* <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **Bunsen - Secretario portfolio** (`bunsen-backend`)
+* <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **Bunsen - Portfolio Secretary** (`bunsen-backend`)
 * <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **Chat Y2K** (`chat-backend-6g1r`)
 * <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **Conecta 4** (`conecta4-backend`)
 * <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
