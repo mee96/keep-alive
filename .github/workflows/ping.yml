@@ -12,3 +12,8 @@ jobs:
       - run: curl -sf https://conecta4-backend.onrender.com/health || true
       - run: curl -sf https://skincareapp-api.onrender.com/health || true
       - run: curl -sf https://bbt-760x.onrender.com/health || true
+      - name: Ping Qdrant cluster
+        run: |
+          curl -sf -H "api-key: ${{ secrets.QDRANT_API_KEY }}" \
+            https://bd6c2ab7-b24a-4ab2-ab85-78b2c1a32a16.eu-west-2-0.aws.cloud.qdrant.io/collections \
+            || true

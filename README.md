@@ -10,6 +10,11 @@ contra els endpoints `/health` de diversos backends desplegats a Render (pla gra
 - SkinCareApp (`skincareapp-api`)
 - BBT (`bbt-760x`)
 
+A més, fa una petició a l'endpoint `/collections` del clúster de **Qdrant Cloud**
+que fa servir el backend de Bunsen, per evitar que el clúster (pla gratuït) es
+pausi per inactivitat. Aquesta petició necessita una API key, que es passa com
+a secret del repositori (`QDRANT_API_KEY`) i mai apareix en text pla al YAML.
+
 ## Per què existeix
 
 Render "adorm" els serveis gratuïts després d'uns minuts d'inactivitat, i el primer
