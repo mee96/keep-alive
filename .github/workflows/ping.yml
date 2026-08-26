@@ -1,0 +1,14 @@
+name: Keep Render backends alive
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -sf https://bunsen-backend.onrender.com/health || true
+      - run: curl -sf https://chat-backend-6g1r.onrender.com/health || true
+      - run: curl -sf https://conecta4-backend.onrender.com/health || true
+      - run: curl -sf https://skincareapp-api.onrender.com/health || true
+      - run: curl -sf https://bbt-760x.onrender.com/health || true
