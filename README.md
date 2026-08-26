@@ -47,7 +47,7 @@ Actualmente mantiene despiertos los siguientes backends:
 * <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
 * <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **BBT — BubbleTea API** (`bbt-760x`)
 
-También hace ping al clúster de **Qdrant Cloud** que usa Bunsen (`/collections`, autenticado con el secreto `QDRANT_API_KEY`).
+También hace ping al clúster de **Qdrant Cloud** que usan Bunsen y Chat, mis dos RAGs (`/collections`, autenticado con el secreto `QDRANT_API_KEY`).
 
 ---
 
@@ -88,7 +88,7 @@ Currently keeping the following backends active:
 * <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
 * <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **BBT — BubbleTea API** (`bbt-760x`)
 
-It also pings the **Qdrant Cloud** cluster used by Bunsen (`/collections`, authenticated via the `QDRANT_API_KEY` secret).
+It also pings the **Qdrant Cloud** cluster used by Bunsen and Chat, my two RAGs (`/collections`, authenticated via the `QDRANT_API_KEY` secret).
 
 ---
 
