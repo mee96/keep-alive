@@ -47,10 +47,7 @@ Actualmente mantiene despiertos los siguientes backends:
 * <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
 * <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **BBT — BubbleTea API** (`bbt-760x`)
 
-Además, hace una petición al endpoint `/collections` del clúster de **Qdrant Cloud**
-que usa el backend de Bunsen, para evitar que se pause por inactividad. Esta petición
-usa una API key que se pasa como secreto del repositorio (`QDRANT_API_KEY`) y nunca
-aparece en texto plano en el YAML.
+También hace ping al clúster de **Qdrant Cloud** que usa Bunsen (`/collections`, autenticado con el secreto `QDRANT_API_KEY`).
 
 ---
 
@@ -91,10 +88,7 @@ Currently keeping the following backends active:
 * <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
 * <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **BBT — BubbleTea API** (`bbt-760x`)
 
-It also pings the `/collections` endpoint of the **Qdrant Cloud** cluster used by
-the Bunsen backend, to prevent it from pausing due to inactivity. This request uses
-an API key passed as a repository secret (`QDRANT_API_KEY`), never in plain text
-in the YAML.
+It also pings the **Qdrant Cloud** cluster used by Bunsen (`/collections`, authenticated via the `QDRANT_API_KEY` secret).
 
 ---
 
