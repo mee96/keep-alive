@@ -8,6 +8,8 @@
 [![Render](https://img.shields.io/badge/Render-c5b9f0?style=for-the-badge&logo=render&logoColor=2d1b6e)](https://render.com/)
 &nbsp;
 [![Cron Status](https://img.shields.io/badge/Ping_Interval-Every_10_min-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
+&nbsp;
+[![Cron-Job](https://img.shields.io/badge/Backup-cron--job.org-f4b8d4?style=for-the-badge&logoColor=2d1b6e)](https://cron-job.org/)
 
 </div>
 
