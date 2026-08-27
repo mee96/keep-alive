@@ -27,7 +27,9 @@
 
 Los servicios en el plan gratuito de **Render** entran en modo suspensión (*sleep*) tras unos minutos de inactividad, lo que provoca que la primera petición después del parón tarde bastante en responder (*cold start*). 
 
-Este repositorio resuelve ese problema de forma sencilla: contiene un **GitHub Action** que ejecuta un `curl` cada 10 minutos contra los endpoints `/health` de mis backends. De esta forma se mantienen activos continuamente **sin necesidad de infraestructura externa ni costes adicionales**.
+Este repositorio resuelve ese problema de forma sencilla: contiene un **GitHub Action** que ejecuta un `curl` cada 10 minutos contra los endpoints `/health` de mis backends. De esta forma se mantienen activos continuamente **sin necesidad de infraestructura compleja ni costes adicionales**.
+
+> ⚠️ **Nota sobre la fiabilidad:** Los eventos programados (`schedule/cron`) de GitHub Actions no son 100% precisos y sufren retrasos o desestimaciones periódicas según la carga de sus servidores. Como medida preventiva, se utiliza en paralelo la plataforma externa **[cron-job.org](https://cron-job.org/)** para realizar pings de respaldo y asegurar una disponibilidad continua.
 
 ---
 
@@ -35,17 +37,19 @@ Este repositorio resuelve ese problema de forma sencilla: contiene un **GitHub A
 
 Actualmente mantiene despiertos los siguientes backends:
 
+![Plántealo](https://img.shields.io/badge/Plántealo-f4b8d4?style=flat-square&logoColor=2d1b6e)
 ![Bunsen](https://img.shields.io/badge/Bunsen-c5b9f0?style=flat-square&logoColor=2d1b6e)
 ![Chat Y2K](https://img.shields.io/badge/Chat_Y2K-f4b8d4?style=flat-square&logoColor=2d1b6e)
 ![Conecta4](https://img.shields.io/badge/Conecta_4-a8c4f0?style=flat-square&logoColor=1b2e4b)
 ![SkinCareApp](https://img.shields.io/badge/SkinCare_App-b8e8d4?style=flat-square&logoColor=2d1b6e)
 ![BBT API](https://img.shields.io/badge/BBT_API-f0e4a0?style=flat-square&logoColor=2d1b6e)
 
-* <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **Bunsen** (`bunsen-backend`)
-* <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **Chat Y2K** (`chat-backend-6g1r`)
-* <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **Conecta 4** (`conecta4-backend`)
-* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
-* <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **BBT — BubbleTea API** (`bbt-760x`)
+* <img src="https://api.iconify.design/ph/plant-fill.svg?color=%232FB5AE&height=18" height="16"> **[Plántealo](https://github.com/AlmaQm/Plantealo)** (`plantealo`) — [`https://plantealo.onrender.com/`](https://plantealo.onrender.com/)
+* <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **[Bunsen — Portfolio Secretary](https://github.com/mee96/portfoli.v2)** (`bunsen-backend`) — [`https://bunsen-backend.onrender.com/health`](https://bunsen-backend.onrender.com/health)
+* <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **[Chat Y2K](https://github.com/mee96/Chat)** (`chat-backend-6g1r`) — [`https://chat-frontend-o57q.onrender.com/`](https://chat-frontend-o57q.onrender.com/)
+* <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **[Conecta 4](https://github.com/mee96/juego-conecta-4)** (`conecta4-backend`) — [`https://conecta4-backend.onrender.com/`](https://conecta4-backend.onrender.com/)
+* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **[SkinCareApp](https://github.com/mee96/SkinCareApp)** (`skincareapp-api`) — [`https://skincareapp-api.onrender.com/health`](https://skincareapp-api.onrender.com/health)
+* <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **[BBT — BubbleTea API](https://github.com/mee96/BBT)** (`bbt-760x`) — [`https://bbt-760x.onrender.com/`](https://bbt-760x.onrender.com/)
 
 También hace ping al clúster de **Qdrant Cloud** que usan Bunsen y Chat, mis dos RAGs (`/collections`, autenticado con el secreto `QDRANT_API_KEY`).
 
@@ -70,23 +74,27 @@ Free tier services on **Render** go to sleep after a few minutes of inactivity, 
 
 This repository solves that issue effortlessly: it hosts a **GitHub Action** that performs a `curl` ping every 10 minutes to the `/health` endpoints of my deployed backends. This keeps them warm and ready **without requiring third-party infrastructure or extra costs**.
 
+> ⚠️ **Reliability Note:** Scheduled GitHub Actions (`schedule/cron`) do not execute with 100% precision and can be delayed or skipped depending on server load. As a preventive fallback, **[cron-job.org](https://cron-job.org/)** is configured in parallel to handle backup pings and ensure seamless uptime.
+
 ---
 
 ### <img src="https://api.iconify.design/ph/cpu-fill.svg?color=%23B372CF&height=24" height="22"> &nbsp;Monitored Services
 
 Currently keeping the following backends active:
 
+![Plántealo](https://img.shields.io/badge/Plántealo-f4b8d4?style=flat-square&logoColor=2d1b6e)
 ![Bunsen](https://img.shields.io/badge/Bunsen-c5b9f0?style=flat-square&logoColor=2d1b6e)
 ![Chat Y2K](https://img.shields.io/badge/Chat_Y2K-f4b8d4?style=flat-square&logoColor=2d1b6e)
 ![Conecta4](https://img.shields.io/badge/Conecta_4-a8c4f0?style=flat-square&logoColor=1b2e4b)
 ![SkinCareApp](https://img.shields.io/badge/SkinCare_App-b8e8d4?style=flat-square&logoColor=2d1b6e)
 ![BBT API](https://img.shields.io/badge/BBT_API-f0e4a0?style=flat-square&logoColor=2d1b6e)
 
-* <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **Bunsen - Portfolio Secretary** (`bunsen-backend`)
-* <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **Chat Y2K** (`chat-backend-6g1r`)
-* <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **Conecta 4** (`conecta4-backend`)
-* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **SkinCareApp** (`skincareapp-api`)
-* <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **BBT — BubbleTea API** (`bbt-760x`)
+* <img src="https://api.iconify.design/ph/plant-fill.svg?color=%232FB5AE&height=18" height="16"> **[Plántealo](https://github.com/AlmaQm/Plantealo)** (`plantealo`) — [`https://plantealo.onrender.com/`](https://plantealo.onrender.com/)
+* <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **[Bunsen — Portfolio Secretary](https://github.com/mee96/portfoli.v2)** (`bunsen-backend`) — [`https://bunsen-backend.onrender.com/health`](https://bunsen-backend.onrender.com/health)
+* <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **[Chat Y2K](https://github.com/mee96/Chat)** (`chat-backend-6g1r`) — [`https://chat-frontend-o57q.onrender.com/`](https://chat-frontend-o57q.onrender.com/)
+* <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **[Conecta 4](https://github.com/mee96/juego-conecta-4)** (`conecta4-backend`) — [`https://conecta4-backend.onrender.com/`](https://conecta4-backend.onrender.com/)
+* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **[SkinCareApp](https://github.com/mee96/SkinCareApp)** (`skincareapp-api`) — [`https://skincareapp-api.onrender.com/health`](https://skincareapp-api.onrender.com/health)
+* <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **[BBT — BubbleTea API](https://github.com/mee96/BBT)** (`bbt-760x`) — [`https://bbt-760x.onrender.com/`](https://bbt-760x.onrender.com/)
 
 It also pings the **Qdrant Cloud** cluster used by Bunsen and Chat, my two RAGs (`/collections`, authenticated via the `QDRANT_API_KEY` secret).
 
