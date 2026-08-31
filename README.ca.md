@@ -50,7 +50,7 @@ Actualment manté desperts els següents backends:
 * <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **[Bunsen — Secretari de Portfolio](https://github.com/mee96/portfoli.v2)** (`bunsen-backend`) — [`https://bunsen-backend.onrender.com/health`](https://bunsen-backend.onrender.com/health)
 * <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **[Chat Y2K](https://github.com/mee96/Chat)** (`chat-backend-6g1r`) — [`https://chat-frontend-o57q.onrender.com/`](https://chat-frontend-o57q.onrender.com/)
 * <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **[Conecta 4](https://github.com/mee96/juego-conecta-4)** (`conecta4-backend`) — [`https://conecta4-backend.onrender.com/`](https://conecta4-backend.onrender.com/)
-* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **[SkinCareApp](https://github.com/mee96/SkinCareApp)** (`skincareapp-api`) → `/health` + `/db-check` (Aiven MySQL)
+* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **[SkinCareApp](https://github.com/mee96/SkinCareApp)** (`skincareapp-api`) → `/health` + `/db-check` (manté actiu el MySQL compartit d'Aiven — usat per SkinCareApp, BBT i altres)
 * <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **[BBT — BubbleTea API](https://github.com/mee96/BBT)** (`bbt-760x`) — [`https://bbt-760x.onrender.com/`](https://bbt-760x.onrender.com/)
 
 També fa ping al clúster de **Qdrant Cloud** que fan servir Bunsen i Chat, els meus dos RAGs (`/collections`, autenticat amb el secret `QDRANT_API_KEY`).
