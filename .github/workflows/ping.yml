@@ -11,7 +11,9 @@ jobs:
       - run: curl -sf https://chat-backend-6g1r.onrender.com/health || true
       - run: curl -sf https://conecta4-backend.onrender.com/health || true
       - run: curl -sf https://skincareapp-api.onrender.com/health || true
+      - run: curl -sf https://skincareapp-api.onrender.com/db-check || true
       - run: curl -sf https://bbt-760x.onrender.com/health || true
+      - run: curl -sf https://plantealo.onrender.com/health || true
       - name: Ping Qdrant cluster
         run: |
           curl -sf -H "api-key: ${{ secrets.QDRANT_API_KEY }}" \
