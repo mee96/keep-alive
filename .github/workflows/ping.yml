@@ -1,21 +1,11 @@
-name: Keep Render backends alive
+name: Keep portfolio backend alive (manual)
+# El ping programado (cada 10 min, 08:30-19:00 Europe/Madrid) se hace desde cron-job.org.
+# El cron de GitHub Actions va en UTC y no sigue el cambio de hora, asi que aqui solo
+# queda el disparo manual para pings puntuales.
 on:
-  schedule:
-    - cron: '*/10 * * * *'
   workflow_dispatch:
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
       - run: curl -sf https://bunsen-backend.onrender.com/health || true
-      - run: curl -sf https://chat-backend-6g1r.onrender.com/health || true
-      - run: curl -sf https://conecta4-backend.onrender.com/health || true
-      - run: curl -sf https://skincareapp-api.onrender.com/health || true
-      - run: curl -sf https://skincareapp-api.onrender.com/db-check || true
-      - run: curl -sf https://bbt-760x.onrender.com/health || true
-      - run: curl -sf https://plantealo.onrender.com/health || true
-      - name: Ping Qdrant cluster
-        run: |
-          curl -sf -H "api-key: ${{ secrets.QDRANT_API_KEY }}" \
-            https://bd6c2ab7-b24a-4ab2-ab85-78b2c1a32a16.eu-west-2-0.aws.cloud.qdrant.io/collections \
-            || true

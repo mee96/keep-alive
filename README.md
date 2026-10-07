@@ -1,15 +1,15 @@
 <!-- Header estètic blau coordinat amb la teva paleta -->
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=a8c4f0&height=180&section=header&text=keep-alive&fontColor=1b2e4b&fontSize=38&desc=GitHub%20Action%20to%20prevent%20Render's%20cold%20starts&descSize=16&descColor=1b2e4b&descAlignY=65&fontAlignY=42" width="100%" alt="keep-alive" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=a8c4f0&height=180&section=header&text=keep-alive&fontColor=1b2e4b&fontSize=38&desc=Keeping%20my%20portfolio%20backend%20warm%20on%20Render&descSize=16&descColor=1b2e4b&descAlignY=65&fontAlignY=42" width="100%" alt="keep-alive" />
 
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-a8c4f0?style=for-the-badge&logo=githubactions&logoColor=1b2e4b)](https://github.com/features/actions)
 &nbsp;
 [![Render](https://img.shields.io/badge/Render-c5b9f0?style=for-the-badge&logo=render&logoColor=2d1b6e)](https://render.com/)
 &nbsp;
-[![Cron Status](https://img.shields.io/badge/Ping_Interval-Every_10_min-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
+[![Cron Status](https://img.shields.io/badge/Ping-Every_10_min_%C2%B7_08%3A30%E2%80%9319%3A00-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
 &nbsp;
-[![Cron-Job](https://img.shields.io/badge/Backup-cron--job.org-f4b8d4?style=for-the-badge&logoColor=2d1b6e)](https://cron-job.org/)
+[![Cron-Job](https://img.shields.io/badge/Scheduler-cron--job.org-f4b8d4?style=for-the-badge&logoColor=2d1b6e)](https://cron-job.org/)
 
 </div>
 
@@ -27,42 +27,26 @@
 
 ### <img src="https://api.iconify.design/ph/question-fill.svg?color=%235B9BD5&height=24" height="22"> &nbsp;Why does this repository exist?
 
-Free tier services on **Render** go to sleep after a few minutes of inactivity, resulting in high latency on the first request (*cold start*).
+Free tier services on **Render** go to sleep after a few minutes of inactivity, so the first request after a pause takes a while to respond (*cold start*). The free tier also has a monthly limit of instance hours shared by all services, so keeping every backend awake 24/7 isn't sustainable.
 
-This repository solves that issue effortlessly: it hosts a **GitHub Action** that performs a `curl` ping every 10 minutes to the `/health` endpoints of my deployed backends. This keeps them warm and ready **without requiring third-party infrastructure or extra costs**.
+That's why this repository keeps only my **portfolio backend** warm, and only during the hours recruiters are most likely to visit: a ping to `/health` **every 10 minutes from 08:30 to 19:00 (Europe/Madrid)**. Outside that window, and for the rest of my projects, the first request may take 30–60 seconds while the server wakes up.
 
-> ⚠️ **Reliability Note:** Scheduled GitHub Actions (`schedule/cron`) do not execute with 100% precision and can be delayed or skipped depending on server load. As a preventive fallback, **[cron-job.org](https://cron-job.org/)** is configured in parallel to handle backup pings and ensure seamless uptime.
+> 🕒 **Scheduler:** the ping runs on **[cron-job.org](https://cron-job.org/)**, configured with the `Europe/Madrid` timezone. GitHub Actions' `schedule` runs in UTC (it doesn't follow daylight saving time) and can be delayed or skipped, so the workflow in this repo only keeps a **manual trigger** (`workflow_dispatch`) for one-off pings.
 
 ---
 
 ### <img src="https://api.iconify.design/ph/cpu-fill.svg?color=%23B372CF&height=24" height="22"> &nbsp;Monitored Services
 
-Currently keeping the following backends active:
-
-![Plántealo](https://img.shields.io/badge/Plántealo-f4b8d4?style=flat-square&logoColor=2d1b6e)
 ![Bunsen](https://img.shields.io/badge/Bunsen-c5b9f0?style=flat-square&logoColor=2d1b6e)
-![Chat Y2K](https://img.shields.io/badge/Chat_Y2K-f4b8d4?style=flat-square&logoColor=2d1b6e)
-![Conecta4](https://img.shields.io/badge/Conecta_4-a8c4f0?style=flat-square&logoColor=1b2e4b)
-![SkinCareApp](https://img.shields.io/badge/SkinCare_App-b8e8d4?style=flat-square&logoColor=2d1b6e)
-![BBT API](https://img.shields.io/badge/BBT_API-f0e4a0?style=flat-square&logoColor=2d1b6e)
 
-* <img src="https://api.iconify.design/ph/plant-fill.svg?color=%232FB5AE&height=18" height="16"> **[Plántealo](https://github.com/AlmaQm/Plantealo)** (`plantealo`) — [`https://plantealo.onrender.com/`](https://plantealo.onrender.com/)
 * <img src="https://api.iconify.design/ph/robot-fill.svg?color=%23B372CF&height=18" height="16"> **[Bunsen — Portfolio Secretary](https://github.com/mee96/portfoli.v2)** (`bunsen-backend`) — [`https://bunsen-backend.onrender.com/health`](https://bunsen-backend.onrender.com/health)
-* <img src="https://api.iconify.design/ph/chats-teardrop-fill.svg?color=%23FF6FA8&height=18" height="16"> **[Chat Y2K](https://github.com/mee96/Chat)** (`chat-backend-6g1r`) — [`https://chat-frontend-o57q.onrender.com/`](https://chat-frontend-o57q.onrender.com/)
-* <img src="https://api.iconify.design/ph/game-controller-fill.svg?color=%235B9BD5&height=18" height="16"> **[Conecta 4](https://github.com/mee96/juego-conecta-4)** (`conecta4-backend`) — [`https://conecta4-backend.onrender.com/`](https://conecta4-backend.onrender.com/)
-* <img src="https://api.iconify.design/ph/drop-fill.svg?color=%232FB5AE&height=18" height="16"> **[SkinCareApp](https://github.com/mee96/SkinCareApp)** (`skincareapp-api`) → `/health` + `/db-check` (keeps shared Aiven MySQL alive — used by SkinCareApp, BBT and others)
-* <img src="https://api.iconify.design/ph/coffee-fill.svg?color=%23E0A63B&height=18" height="16"> **[BBT — BubbleTea API](https://github.com/mee96/BBT)** (`bbt-760x`) — [`https://bbt-760x.onrender.com/`](https://bbt-760x.onrender.com/)
-
-It also pings the **Qdrant Cloud** cluster used by Bunsen and Chat, my two RAGs (`/collections`, authenticated via the `QDRANT_API_KEY` secret).
 
 ---
 
 ### <img src="https://api.iconify.design/ph/gear-six-fill.svg?color=%232FB5AE&height=24" height="22"> &nbsp;Maintenance
 
-* **Add a new backend:** Add a new line to the [`.github/workflows/ping.yml`](.github/workflows/ping.yml) workflow file:
-<pre><code>curl -sf https://your-backend.onrender.com/health || true</code></pre>
-
-* **Remove a backend:** Delete the corresponding `curl` line from `ping.yml`.
+* **Change the schedule or add a backend:** edit the job on cron-job.org (URL `https://your-backend.onrender.com/health`, every 10 min, timezone `Europe/Madrid`). Keep in mind that every backend kept awake consumes instance hours from Render's free tier.
+* **One-off manual ping:** run the workflow [`.github/workflows/ping.yml`](.github/workflows/ping.yml) from the Actions tab (*Run workflow*).
 
 <br/>
 
