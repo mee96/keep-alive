@@ -7,7 +7,7 @@
 &nbsp;
 [![Render](https://img.shields.io/badge/Render-c5b9f0?style=for-the-badge&logo=render&logoColor=2d1b6e)](https://render.com/)
 &nbsp;
-[![Cron Status](https://img.shields.io/badge/Ping-Every_10_min_%C2%B7_08%3A30%E2%80%9319%3A00-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
+[![Cron Status](https://img.shields.io/badge/Ping-Every_10_min_%C2%B7_08%3A00%E2%80%9319%3A00-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
 &nbsp;
 [![Cron-Job](https://img.shields.io/badge/Scheduler-cron--job.org-f4b8d4?style=for-the-badge&logoColor=2d1b6e)](https://cron-job.org/)
 
@@ -29,9 +29,9 @@
 
 Free tier services on **Render** go to sleep after a few minutes of inactivity, so the first request after a pause takes a while to respond (*cold start*). The free tier also has a monthly limit of instance hours shared by all services, so keeping every backend awake 24/7 isn't sustainable.
 
-That's why this repository keeps only my **portfolio backend** warm, and only during the hours recruiters are most likely to visit: a ping to `/health` **every 10 minutes from 08:30 to 19:00 (Europe/Madrid)**. Outside that window, and for the rest of my projects, the first request may take 30–60 seconds while the server wakes up.
+That's why this repository keeps only my **portfolio backend** warm, and only during the hours recruiters are most likely to visit: a ping to `/health` **every 10 minutes from 08:00 to 19:00 (Europe/Madrid)**. Outside that window, and for the rest of my projects, the first request may take 30–60 seconds while the server wakes up.
 
-> 🕒 **Scheduler:** the ping runs on **[cron-job.org](https://cron-job.org/)**, configured with the `Europe/Madrid` timezone. GitHub Actions' `schedule` runs in UTC (it doesn't follow daylight saving time) and can be delayed or skipped, so the workflow in this repo only keeps a **manual trigger** (`workflow_dispatch`) for one-off pings.
+> 🕒 **How it works:** two pieces work together. **[cron-job.org](https://cron-job.org/)** (timezone `Europe/Madrid`) pings `/health` every 10 minutes to keep the backend warm, but it can't wake a service that's already asleep (Render answers `503` without starting it). So the GitHub Action in this repo runs **once an hour during working hours**, with retries, to wake it up when needed — in the morning or after a missed ping. Its `schedule` runs in UTC (`0 6-16 * * *`), so in winter the window shifts by one hour.
 
 ---
 

@@ -1,11 +1,18 @@
-name: Keep portfolio backend alive (manual)
-# El ping programado (cada 10 min, 08:30-19:00 Europe/Madrid) se hace desde cron-job.org.
-# El cron de GitHub Actions va en UTC y no sigue el cambio de hora, asi que aqui solo
-# queda el disparo manual para pings puntuales.
+name: Wake portfolio backend
+# cron-job.org (Europe/Madrid) pings /health every 10 min, 08:00-19:00, to keep Bunsen warm,
+# but it can't wake a sleeping Render service (Render answers 503 without starting it).
+# This workflow wakes it up once an hour during working hours, with retries.
+# GitHub cron runs in UTC: 06-16 UTC = 08-18 CEST (summer) / 07-17 CET (winter).
 on:
+  schedule:
+    - cron: '0 6-16 * * *'
   workflow_dispatch:
 jobs:
-  ping:
+  wake:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -sf https://bunsen-backend.onrender.com/health || true
+      - name: Wake Bunsen backend
+        run: |
+          curl -s -o /dev/null -w "HTTP %{http_code}\n" \
+            --retry 5 --retry-delay 20 --retry-all-errors --max-time 90 \
+            https://bunsen-backend.onrender.com/health || true

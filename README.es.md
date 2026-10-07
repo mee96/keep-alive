@@ -7,7 +7,7 @@
 &nbsp;
 [![Render](https://img.shields.io/badge/Render-c5b9f0?style=for-the-badge&logo=render&logoColor=2d1b6e)](https://render.com/)
 &nbsp;
-[![Cron Status](https://img.shields.io/badge/Ping-Every_10_min_%C2%B7_08%3A30%E2%80%9319%3A00-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
+[![Cron Status](https://img.shields.io/badge/Ping-Every_10_min_%C2%B7_08%3A00%E2%80%9319%3A00-b8e8d4?style=for-the-badge&logoColor=2d1b6e)](#)
 &nbsp;
 [![Cron-Job](https://img.shields.io/badge/Scheduler-cron--job.org-f4b8d4?style=for-the-badge&logoColor=2d1b6e)](https://cron-job.org/)
 
@@ -29,9 +29,9 @@
 
 Los servicios en el plan gratuito de **Render** entran en modo suspensión (*sleep*) tras unos minutos de inactividad, lo que provoca que la primera petición después del parón tarde bastante en responder (*cold start*). Además, el plan gratuito tiene un límite mensual de horas de instancia compartido entre todos los servicios, así que mantener todos los backends despiertos 24/7 no es sostenible.
 
-Por eso este repositorio mantiene activo solo el **backend de mi portfolio**, y solo en las horas en que es más probable que lo visiten reclutadores: un ping a `/health` **cada 10 minutos de 08:30 a 19:00 (Europe/Madrid)**. Fuera de esa franja, y en el resto de mis proyectos, la primera petición puede tardar 30–60 segundos mientras el servidor arranca.
+Por eso este repositorio mantiene activo solo el **backend de mi portfolio**, y solo en las horas en que es más probable que lo visiten reclutadores: un ping a `/health` **cada 10 minutos de 08:00 a 19:00 (Europe/Madrid)**. Fuera de esa franja, y en el resto de mis proyectos, la primera petición puede tardar 30–60 segundos mientras el servidor arranca.
 
-> 🕒 **Programación:** el ping se ejecuta desde **[cron-job.org](https://cron-job.org/)**, configurado con la zona horaria `Europe/Madrid`. El `schedule` de GitHub Actions funciona en UTC (no sigue el cambio de hora) y puede sufrir retrasos u omisiones, así que el workflow de este repo solo conserva un **disparo manual** (`workflow_dispatch`) para pings puntuales.
+> 🕒 **Cómo funciona:** dos piezas trabajan juntas. **[cron-job.org](https://cron-job.org/)** (zona horaria `Europe/Madrid`) hace ping a `/health` cada 10 minutos para mantener el backend en caliente, pero no puede despertar un servicio que ya está dormido (Render responde `503` sin arrancarlo). Por eso la GitHub Action de este repo se ejecuta **una vez por hora en horario laboral**, con reintentos, para despertarlo cuando hace falta — por la mañana o tras un ping fallido. Su `schedule` va en UTC (`0 6-16 * * *`), así que en invierno la franja se desplaza una hora.
 
 ---
 
