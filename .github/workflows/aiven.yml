@@ -18,9 +18,10 @@ jobs:
       - name: PostgreSQL
         if: env.AIVEN_PG_URI != ''
         run: |
-          for i in 1 2 3 4 5; do
-            psql "$AIVEN_PG_URI" -c 'select 1;' && exit 0
-            echo "attempt $i failed, retrying in 30s"; sleep 30
+          for i in 1 2 3; do
+            out=$(psql "$AIVEN_PG_URI" -c 'select 1;' 2>&1) && { echo "$out"; exit 0; }
+            echo "::error title=psql attempt $i::$(echo "$out" | tr '\n' ' ' | head -c 300)"
+            sleep 15
           done
           exit 1
       - name: MySQL
