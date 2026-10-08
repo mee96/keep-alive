@@ -1,0 +1,29 @@
+name: Keep Aiven databases active
+# Aiven's free plan powers a service off ~24 h after its last connection.
+# This opens a real DB connection and runs `select 1` twice a day.
+# Secrets (Settings > Secrets and variables > Actions):
+#   AIVEN_PG_URI    postgres://user:pass@host:port/db?sslmode=require   (optional)
+#   AIVEN_MYSQL_URI mysql://user:pass@host:port/db?ssl-mode=REQUIRED    (optional)
+on:
+  schedule:
+    - cron: '17 7,19 * * *'
+  workflow_dispatch:
+jobs:
+  ping-db:
+    runs-on: ubuntu-latest
+    env:
+      AIVEN_PG_URI: ${{ secrets.AIVEN_PG_URI }}
+      AIVEN_MYSQL_URI: ${{ secrets.AIVEN_MYSQL_URI }}
+    steps:
+      - name: PostgreSQL
+        if: env.AIVEN_PG_URI != ''
+        run: psql "$AIVEN_PG_URI" -c 'select 1;'
+      - name: MySQL
+        if: env.AIVEN_MYSQL_URI != ''
+        run: |
+          sudo apt-get install -y -qq mysql-client >/dev/null
+          mysql --protocol=tcp "--host=$(python3 -c 'import os,urllib.parse as u;print(u.urlparse(os.environ["AIVEN_MYSQL_URI"]).hostname)')" \
+            "--port=$(python3 -c 'import os,urllib.parse as u;print(u.urlparse(os.environ["AIVEN_MYSQL_URI"]).port)')" \
+            "--user=$(python3 -c 'import os,urllib.parse as u;print(u.urlparse(os.environ["AIVEN_MYSQL_URI"]).username)')" \
+            "--password=$(python3 -c 'import os,urllib.parse as u;print(u.urlparse(os.environ["AIVEN_MYSQL_URI"]).password)')" \
+            --ssl-mode=REQUIRED -e 'select 1;' "$(python3 -c 'import os,urllib.parse as u;print(u.urlparse(os.environ["AIVEN_MYSQL_URI"]).path[1:])')"
