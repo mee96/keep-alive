@@ -17,7 +17,12 @@ jobs:
     steps:
       - name: PostgreSQL
         if: env.AIVEN_PG_URI != ''
-        run: psql "$AIVEN_PG_URI" -c 'select 1;'
+        run: |
+          for i in 1 2 3 4 5; do
+            psql "$AIVEN_PG_URI" -c 'select 1;' && exit 0
+            echo "attempt $i failed, retrying in 30s"; sleep 30
+          done
+          exit 1
       - name: MySQL
         if: env.AIVEN_MYSQL_URI != ''
         run: |
